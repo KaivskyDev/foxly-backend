@@ -1,0 +1,43 @@
+{$HOSTNAME} {
+	reverse_proxy http://web:5000
+}
+
+{$API_HOSTNAME} {
+	route /ws {
+		uri strip_prefix /ws
+		reverse_proxy http://events:14703 {
+			header_down Location "^/" "/ws/"
+		}
+	}
+
+	route /gifbox* {
+		uri strip_prefix /gifbox
+		reverse_proxy http://gifbox:14706 {
+			header_down Location "^/" "/gifbox/"
+		}
+	}
+
+	route /livekit* {
+		uri strip_prefix /livekit
+		reverse_proxy http://livekit:7880 {
+			header_down Location "^/" "/livekit/"
+		}
+	}
+
+	route /ingress* {
+		uri strip_prefix /ingress
+		reverse_proxy http://voice-ingress:8500 {
+			header_down Location "^/" "/ingress/"
+		}
+	}
+
+	reverse_proxy http://api:14702
+}
+
+{$FILES_HOSTNAME} {
+	reverse_proxy http://autumn:14704
+}
+
+{$PROXY_HOSTNAME} {
+	reverse_proxy http://january:14705
+}

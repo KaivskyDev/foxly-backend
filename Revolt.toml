@@ -1,0 +1,65 @@
+[hosts]
+app = "https://foxly.discordlabs.app"
+api = "https://api.foxly.discordlabs.app"
+events = "wss://api.foxly.discordlabs.app/ws"
+autumn = "https://files.foxly.discordlabs.app"
+january = "https://proxy.foxly.discordlabs.app"
+
+[hosts.livekit]
+worldwide = "wss://api.foxly.discordlabs.app/livekit"
+
+[api.security]
+tenor_key = "TdcfxdbARTIH0EIMDBN4yniEK9Wd43Wk"
+
+[api.livekit.nodes.worldwide]
+url = "http://livekit:7880"
+lat = 0.0
+lon = 0.0
+key = "02b0ab951c9d"
+secret = "696418114f6eebc0325869acbd7b9f88ddf3b817d3738e1f"
+
+[foxly.cosmetics.nameplates]
+enabled = true
+custom_uploads_enabled = true
+max_size_bytes = 4000000
+allowed_mime_types = ["image/png", "image/webp", "image/gif"]
+animated_enabled = true
+presets_enabled = true
+custom_enabled = true
+premium_only = false
+upload_path = "/nameplates"
+public_upload_url = "https://files.foxly.discordlabs.app/nameplates"
+cdn_url = "https://files.foxly.discordlabs.app"
+profile_field = "profile.nameplate"
+storage_tag = "nameplates"
+max_width = 1024
+max_height = 256
+max_per_user = 10
+moderation_enabled = true
+
+[foxly.discover]
+enabled = true
+auto_sync = true
+max_description_length = 1000
+max_tags = 8
+max_tag_length = 32
+require_invite = true
+allow_nsfw = false
+
+[foxly.decorations]
+enabled = true
+custom_enabled = true
+presets_enabled = true
+
+[foxly.gif]
+enabled = true
+provider = "giphy"
+proxy_enabled = true
+
+[features.limits.new_user]
+video_resolution = [1920, 1080]
+video_aspect_ratio = [0.3, 10]
+
+[features.limits.default]
+video_resolution = [1920, 1080]
+video_aspect_ratio = [0.3, 10]

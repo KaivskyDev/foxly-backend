@@ -56,6 +56,196 @@ enabled = true
 provider = "giphy"
 proxy_enabled = true
 
+[foxly.activity]
+enabled = true
+global_enabled = true
+persist_enabled = true
+extend_existing_status_model = true
+database_collection = "users"
+endpoint = "/users/@me"
+read_endpoint = "/users/:id/profile"
+profile_field = "profile.activity"
+status_field = "status"
+started_at_field = "started_at"
+updated_at_field = "updated_at"
+max_name_length = 64
+max_details_length = 128
+max_state_length = 128
+allowed_types = ["playing", "listening", "watching", "streaming", "custom"]
+ttl_seconds = 900
+
+[foxly.status]
+enabled = true
+persist_enabled = true
+extend_existing_model = true
+profile_field = "status"
+since_field = "status_since"
+updated_at_field = "status_updated_at"
+allowed_values = ["online", "idle", "dnd", "invisible", "offline"]
+
+[foxly.endpoints]
+base = "/foxly"
+version = "v1"
+public_base = "https://api.foxly.discordlabs.app/foxly/v1"
+
+[foxly.chat]
+enhancements_enabled = true
+threads_enabled = true
+forums_enabled = true
+polls_enabled = true
+scheduled_events_enabled = true
+voice_channel_text_enabled = true
+message_search_enabled = true
+message_translation_enabled = true
+message_translation_provider = ""
+max_pinned_messages = 250
+max_poll_options = 12
+max_thread_title_length = 100
+
+[foxly.media]
+clips_enabled = true
+clips_max_seconds = 120
+clips_max_size_bytes = 104857600
+soundboard_enabled = true
+stickers_enabled = true
+stickers_max_size_bytes = 1048576
+
+[foxly.premium]
+enabled = true
+provider = "stripe"
+success_path = "/settings/premium/success"
+cancel_path = "/settings/premium/cancel"
+free_tier_upload_limit_bytes = 25000000
+premium_tier_upload_limit_bytes = 500000000
+premium_profile_cosmetics = true
+premium_hd_streaming = true
+
+[foxly.monetization]
+server_boosts_enabled = true
+shop_enabled = true
+credits_enabled = true
+gifting_enabled = true
+quests_enabled = true
+shop_currency = "credits"
+quests_reward_currency = "credits"
+
+[foxly.apps]
+enabled = true
+bot_directory_enabled = true
+oauth_apps_enabled = true
+enhanced_webhooks_enabled = true
+integrations_enabled = true
+discord_import_enabled = false
+
+[foxly.safety]
+automod_enabled = true
+reports_enabled = true
+audit_log_enabled = true
+trust_safety_enabled = true
+age_gate_enabled = false
+
+[foxly.discover.reviews]
+enabled = true
+featured_enabled = true
+categories = ["gaming", "community", "education", "music", "technology", "art"]
+
+[foxly.experiments]
+enabled = true
+analytics_enabled = false
+
+[foxly.existing_endpoints]
+enrich_enabled = true
+strategy = "extend_existing_payloads"
+compatibility_mode = true
+
+[foxly.existing_endpoints.users]
+endpoints = ["/users/@me", "/users/:id", "/users/:id/profile"]
+collection = "users"
+extra_fields = ["profile.activity", "profile.nameplate", "profile.decoration", "profile.pronouns", "profile.location", "badges", "premium", "entitlements", "devices", "privacy", "safety"]
+
+[foxly.existing_endpoints.messages]
+endpoints = ["/channels/:id/messages", "/channels/:id/messages/:message_id"]
+collection = "messages"
+extra_fields = ["reactions_summary", "attachments_meta", "thread", "poll", "translation", "moderation", "analytics"]
+
+[foxly.existing_endpoints.channels]
+endpoints = ["/channels/:id", "/channels/:id/members"]
+collection = "channels"
+extra_fields = ["stats", "permissions_summary", "thread_defaults", "slowmode", "voice_text", "last_activity_at"]
+
+[foxly.existing_endpoints.servers]
+endpoints = ["/servers/:id", "/servers/:id/members", "/servers/:id/invites"]
+collection = "servers"
+extra_fields = ["discover", "boosts", "premium", "safety", "features", "stats", "integrations"]
+
+[foxly.existing_endpoints.members]
+endpoints = ["/servers/:id/members/:user_id", "/servers/:id/members"]
+collection = "server_members"
+extra_fields = ["roles_meta", "activity_summary", "safety_flags", "joined_source", "premium_since"]
+
+[foxly.existing_endpoints.sessions]
+endpoints = ["/auth/session/all", "/auth/session/:id"]
+collection = "sessions"
+extra_fields = ["device", "client", "ip_region", "last_seen_at", "risk_score"]
+
+[foxly.existing_endpoints.files]
+endpoints = ["/attachments/:id", "/avatars/:id", "/backgrounds/:id", "/icons/:id", "/banners/:id"]
+collection = "file_meta"
+extra_fields = ["width", "height", "duration_ms", "blurhash", "moderation", "owner_id", "linked_resource"]
+
+[foxly.security.encryption]
+enabled = true
+mode = "envelope"
+primary_aead = "AES-256-GCM"
+alternative_aead = "XCHACHA20-POLY1305"
+key_derivation = "HKDF-SHA256"
+master_key_id = "foxly-local-v1"
+rotation_days = 90
+compress_before_encrypt = true
+store_key_material_in_env = false
+
+[foxly.security.database]
+field_encryption_enabled = true
+search_shadow_fields_enabled = true
+search_hash_algorithm = "HMAC-SHA256"
+encrypted_fields = [
+  "users.profile",
+  "users.privacy",
+  "users.devices",
+  "users.safety",
+  "messages.content",
+  "messages.attachments_meta",
+  "sessions.device",
+  "sessions.ip_region",
+  "reports",
+  "audit_log",
+]
+
+[foxly.security.storage]
+file_encryption_enabled = true
+file_encryption = "AES-256-GCM"
+file_key_mode = "per-object"
+metadata_encryption = true
+
+[foxly.compression]
+enabled = true
+algorithm = "zstd"
+hot_level = 6
+archive_level = 19
+min_bytes = 1024
+skip_mime_types = ["image/jpeg", "image/png", "image/webp", "image/gif", "video/mp4", "video/webm", "audio/ogg", "audio/mpeg", "application/zip", "application/gzip", "application/zstd"]
+
+[foxly.media.lossless]
+optimization_enabled = true
+keep_original = true
+image_lossless_formats = ["image/png", "image/webp"]
+video_transcode_lossless = false
+
+[foxly.backups]
+encryption_enabled = true
+compression_algorithm = "zstd"
+compression_level = 19
+
 [features.limits.new_user]
 video_resolution = [1920, 1080]
 video_aspect_ratio = [0.3, 10]

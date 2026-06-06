@@ -11,9 +11,9 @@ turn:
   enabled: false
 
 keys:
-  02b0ab951c9d: 696418114f6eebc0325869acbd7b9f88ddf3b817d3738e1f
+  CHANGE_ME_LIVEKIT_KEY: CHANGE_ME_LIVEKIT_SECRET
 
 webhook:
-  api_key: 02b0ab951c9d
+  api_key: CHANGE_ME_LIVEKIT_KEY
   urls:
     - "http://voice-ingress:8500/worldwide"

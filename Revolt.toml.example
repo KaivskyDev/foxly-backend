@@ -9,14 +9,14 @@ january = "https://proxy.foxly.discordlabs.app"
 worldwide = "wss://api.foxly.discordlabs.app/livekit"
 
 [api.security]
-tenor_key = "TdcfxdbARTIH0EIMDBN4yniEK9Wd43Wk"
+tenor_key = ""
 
 [api.livekit.nodes.worldwide]
 url = "http://livekit:7880"
 lat = 0.0
 lon = 0.0
-key = "02b0ab951c9d"
-secret = "696418114f6eebc0325869acbd7b9f88ddf3b817d3738e1f"
+key = ""
+secret = ""
 
 [foxly.cosmetics.nameplates]
 enabled = true
